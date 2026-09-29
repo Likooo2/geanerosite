@@ -2,7 +2,7 @@
 
 **Un seul fichier à modifier : `js/config.js`.** Le compteur de kilos, l'objectif, les dates, la salle, les listes, le quiz et l'association : tout est dedans, en français et commenté.
 
-Déjà renseigné : les dates (jeudi 12 et vendredi 13 novembre 2026), la salle 111, l'objectif de 300 kg, l'adresse e-mail, l'Instagram et le Facebook du projet, le logo de l'IUT, la page Facebook de l'association et le quiz d'avis.
+Déjà renseigné : les dates (jeudi 12 et vendredi 13 novembre 2026), la salle 101, l'objectif de 300 kg, l'adresse e-mail, l'Instagram et le Facebook du projet, le logo de l'IUT, la page Facebook de l'association et le quiz d'avis.
 
 Le site est en ligne : **https://likooo2.github.io/geanerosite/**
 Pour le modifier : ouvre le lien ci-dessous, clique sur le crayon ✏️, change ce que tu veux, puis **Commit changes**. C'est publié une à deux minutes plus tard, même depuis un téléphone :
@@ -99,7 +99,7 @@ dates: {
   dateConfirmee: true,
 },
 collecte: {
-  salle: "Salle 111, salle de coworking",
+  salle: "Salle 101, salle de coworking",
   precisionLieu: "1er étage du bâtiment GEA / TC",
 },
 ```

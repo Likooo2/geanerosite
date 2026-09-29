@@ -87,7 +87,7 @@ const CONFIG = {
 
   collecte: {
     lieu: "IUT d'Amiens",   // établissement
-    salle: "Salle 111, salle de coworking",      // affiché en gros
+    salle: "Salle 101, salle de coworking",      // affiché en gros
     precisionLieu: "1er étage du bâtiment GEA / TC",   // affiché juste en dessous
     quiPeutVenir: "Étudiants, enseignants et personnels de l'IUT",
     accepte: [
