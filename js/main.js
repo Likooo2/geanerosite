@@ -594,6 +594,7 @@
     secoursImages($("#equipe"), ".polaroid-photo", silhouette);
     if (!(C.equipe || []).some((m) => texte(m.photo))) $("#equipe").classList.add("equipe-noms");
 
+    logoPied($("#logo-projet"), C.logoProjet, "Logo GEAnérosité", "GEAnérosité");
     logoPied($("#logo-iut"), C.logoIUT, "Logo de l'IUT d'Amiens", "IUT d'Amiens");
     logoPied($("#logo-asso"), a.logo, "Logo de " + nom, nom);
     const resp = texte((C.mentionsLegales || {}).responsable);

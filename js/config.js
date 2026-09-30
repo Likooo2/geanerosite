@@ -182,6 +182,7 @@ const CONFIG = {
     { nom: "Noha Bayonga",     role: "", photo: "" },
   ],
 
+  logoProjet: "img/logo-geanerosite.png",   // notre logo, en pied de page
   logoIUT: "img/logo-iut.png",   // vide = le nom est écrit à la place
 
   mentionsLegales: {

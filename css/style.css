@@ -19,7 +19,7 @@
   --marine: #14234a;        /* bleu marine : couleur principale */
   --marine-2: #1d3470;      /* marine éclairci : survols */
   --marine-nuit: #0c1630;   /* tableau d'affichage, pied de page */
-  --accent: #ffc72c;        /* jaune GEA : boutons, repères, détails */
+  --accent: #fec418;        /* jaune du logo GEAnérosité : boutons, repères, détails */
   --accent-fonce: #f2b100;  /* jaune au survol */
   --accent-clair: #fff3c7;  /* fonds jaunes doux */
   --papier: #fcfdff;        /* feuille de cahier */
@@ -28,7 +28,7 @@
   --marge: rgba(226, 84, 84, .5);      /* marge rouge du cahier */
   --encre: var(--marine);   /* texte et traits */
   --encre-2: #4a5470;       /* texte secondaire */
-  --stylo: #1f3fbf;         /* stylo bleu : annotations et liens */
+  --stylo: #0841cc;         /* bleu du logo : annotations et liens */
   --fluo: #ffe14d;          /* surligneur, accordé au jaune GEA */
   --rose: var(--accent);    /* ancien rose : désormais jaune */
   --rose-clair: var(--accent-clair);
@@ -44,7 +44,7 @@
   --rouge: #c92a2d;         /* erreurs */
   --carton: #d2a66b;        /* le carton de collecte */
   --carton-clair: #f0dcbf;
-  --led: #ffc72c;           /* ampoules du tableau d'affichage */
+  --led: #fec418;           /* ampoules du tableau d'affichage */
   --led-off: rgba(255, 199, 44, .12);
 
   /* Polices */
@@ -836,4 +836,27 @@ a { color: var(--stylo); }
 }
 @media (max-width: 22.5rem) {
   .logo-rond { display: none; }
+}
+
+/* ═════════════════ LE LOGO GEANÉROSITÉ ═════════════════ */
+/* En-tête : le symbole sur une pastille blanche, le nom aux couleurs du logo */
+.logo-rond { background: #fff; width: 2.5rem; height: 2.5rem; padding: .22rem; border-radius: 10px 12px 9px 13px; }
+.logo-rond img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.entete-nom { color: var(--accent); }
+.entete-gea { color: #fff; background: none; border: 0; padding: 0; margin-right: 0; transform: none; }
+.pied-nom { color: var(--accent); }
+.pied-nom .entete-gea { color: #fff; }
+
+/* Affiche d'accueil : le logo horizontal remplace l'étiquette */
+.affiche-haut { align-items: center; }
+.affiche-logo { display: block; width: auto; height: clamp(2.6rem, 9vw, 3.4rem); max-width: 100%; }
+
+/* Pied de page : les trois logos côte à côte, même format */
+.pied-logo img { max-height: 4rem; }
+#logo-projet { padding: .35rem; }
+#logo-projet img { max-height: 4.3rem; }
+/* Les trois logos alignés à gauche, sur leur propre ligne */
+.pied-logos { justify-content: flex-start; }
+@media (min-width: 56rem) {
+  .pied-logos { grid-column: 1 / -1; justify-content: flex-start; }
 }
