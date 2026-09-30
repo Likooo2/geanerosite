@@ -15,31 +15,37 @@
 @font-face { font-family: "Atkinson Hyperlegible"; src: url("../fonts/atkinson-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
 
 :root {
-  /* Couleurs */
+  /* Couleurs — identité bleu marine + jaune GEA */
+  --marine: #14234a;        /* bleu marine : couleur principale */
+  --marine-2: #1d3470;      /* marine éclairci : survols */
+  --marine-nuit: #0c1630;   /* tableau d'affichage, pied de page */
+  --accent: #ffc72c;        /* jaune GEA : boutons, repères, détails */
+  --accent-fonce: #f2b100;  /* jaune au survol */
+  --accent-clair: #fff3c7;  /* fonds jaunes doux */
   --papier: #fcfdff;        /* feuille de cahier */
   --blanc: #ffffff;
-  --carreau: rgba(52, 96, 196, .11);   /* petits carreaux */
+  --carreau: rgba(20, 35, 74, .075);   /* petits carreaux, teinte marine */
   --marge: rgba(226, 84, 84, .5);      /* marge rouge du cahier */
-  --encre: #16161b;         /* texte et traits */
-  --encre-2: #4a4a56;       /* texte secondaire */
+  --encre: var(--marine);   /* texte et traits */
+  --encre-2: #4a5470;       /* texte secondaire */
   --stylo: #1f3fbf;         /* stylo bleu : annotations et liens */
-  --fluo: #fff04a;          /* surligneur */
-  --rose: #ff4f9a;          /* soutien, cagnotte */
-  --rose-clair: #ffd3e6;
-  --vert: #0f6b3a;          /* terrain */
+  --fluo: #ffe14d;          /* surligneur, accordé au jaune GEA */
+  --rose: var(--accent);    /* ancien rose : désormais jaune */
+  --rose-clair: var(--accent-clair);
+  --vert: #0f6b3a;          /* « on prend », envoi réussi */
   --vert-2: #127a43;
   --vert-vif: #1f9d55;
   --vert-clair: #d4f1de;
   --craie: #f4fff7;
-  --jaune: #ffd43b;         /* pronostic */
-  --jaune-clair: #fff6a8;
-  --bleu: #2c55d4;          /* tombola */
-  --bleu-clair: #d7e1ff;
-  --rouge: #c92a2d;         /* en direct */
-  --carton: #d2a66b;        /* collecte */
+  --jaune: var(--accent);
+  --jaune-clair: #fff6c9;
+  --bleu: var(--marine);
+  --bleu-clair: #e3e9f7;
+  --rouge: #c92a2d;         /* erreurs */
+  --carton: #d2a66b;        /* le carton de collecte */
   --carton-clair: #f0dcbf;
-  --led: #ffcf33;           /* ampoules du tableau d'affichage */
-  --led-off: rgba(255, 207, 51, .11);
+  --led: #ffc72c;           /* ampoules du tableau d'affichage */
+  --led-off: rgba(255, 199, 44, .12);
 
   /* Polices */
   --police-titre: "Big Shoulders", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
@@ -134,7 +140,7 @@ a:hover { text-decoration-style: wavy; }
   border: 2.5px solid var(--encre); border-radius: 8px 11px 7px 12px;
   box-shadow: 2px 2px 0 var(--encre); transform: rotate(-3deg);
 }
-.sticker-rose { background: var(--rose); }
+.sticker-rose { background: var(--accent); }
 .sticker-jaune { background: var(--fluo); }
 
 /* « à confirmer » : une note écrite à la main, visible par tout le monde */
@@ -155,7 +161,7 @@ a:hover { text-decoration-style: wavy; }
 
 /* ───── Boutons (autocollants épais) ───── */
 .bouton {
-  --fond: var(--rose); --texte: var(--encre);
+  --fond: var(--accent); --texte: var(--marine);
   display: inline-flex; align-items: center; justify-content: center; gap: .45em;
   min-height: 3.3rem; padding: .75rem 1.25rem .7rem;
   font: 800 1.22rem/1.05 var(--police-titre); letter-spacing: .015em; text-transform: uppercase;
@@ -164,14 +170,16 @@ a:hover { text-decoration-style: wavy; }
   border: 3px solid var(--encre); border-radius: 12px 15px 11px 16px;
   box-shadow: 4px 4px 0 var(--encre);
   cursor: pointer; -webkit-tap-highlight-color: transparent;
-  transition: transform .12s ease, box-shadow .12s ease;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
 }
 .bouton:hover { color: var(--texte); text-decoration: none; transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--encre); }
 .bouton:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--encre); }
-.bouton-rose { --fond: var(--rose); }
-.bouton-vert { --fond: var(--vert); --texte: #fff; }
+.bouton-rose, .bouton-accent { --fond: var(--accent); }
+.bouton-accent:hover, .bouton-rose:hover { --fond: var(--accent-fonce); }
+.bouton-vert, .bouton-marine { --fond: var(--marine); --texte: #fff; }
+.bouton-marine:hover, .bouton-vert:hover { --fond: var(--marine-2); }
 .bouton-jaune { --fond: var(--jaune); }
-.bouton-bleu { --fond: var(--bleu); --texte: #fff; }
+.bouton-bleu { --fond: var(--marine); --texte: #fff; }
 .bouton-carton { --fond: var(--carton); }
 .bouton-blanc { --fond: var(--blanc); }
 .bouton-rouge { --fond: var(--rouge); --texte: #fff; }
@@ -203,23 +211,23 @@ a.est-inactif:not(.bouton) { color: var(--encre-2); text-decoration: none; curso
 .lien-bouton:hover { text-decoration-style: wavy; }
 
 /* ───── En-tête et menu ───── */
-.entete { position: sticky; top: 0; z-index: 50; background: rgba(252, 253, 255, .97); border-bottom: var(--bord); }
+.entete { position: sticky; top: 0; z-index: 50; background: var(--marine); border-bottom: 4px solid var(--accent); color: #fff; }
 .entete-barre {
   display: flex; align-items: center; gap: .5rem;
   height: var(--entete-h); max-width: var(--largeur); margin-inline: auto; padding-inline: var(--marge-page);
 }
-.entete-logo { display: inline-flex; align-items: center; gap: .45rem; margin-right: auto; min-height: 2.75rem; color: var(--encre); text-decoration: none; }
+.entete-logo { display: inline-flex; align-items: center; gap: .45rem; margin-right: auto; min-height: 2.75rem; color: #fff; text-decoration: none; }
 .entete-logo:hover { text-decoration: none; }
 .logo-ballon { width: 2.1rem; height: 2.1rem; flex: none; }
 .entete-nom { font: 900 1.55rem/1 var(--police-titre); white-space: nowrap; }
-.entete-gea { display: inline-block; margin-right: .04em; padding: 0 .12em; background: var(--rose); border: 2px solid var(--encre); border-radius: 5px; transform: rotate(-3deg); }
+.entete-gea { display: inline-block; margin-right: .04em; padding: 0 .12em; color: var(--marine); background: var(--accent); border: 2px solid var(--accent); border-radius: 5px; transform: rotate(-3deg); }
 
 .burger {
   display: inline-grid; place-content: center; gap: 5px; flex: none;
   width: 2.75rem; height: 2.75rem; padding: 0;
-  background: var(--blanc); border: var(--bord); border-radius: 9px 11px 8px 12px; cursor: pointer;
+  background: transparent; border: 2px solid rgba(255, 255, 255, .45); border-radius: 9px 11px 8px 12px; cursor: pointer;
 }
-.burger span { display: block; width: 1.3rem; height: 3px; border-radius: 2px; background: var(--encre); transition: transform .25s ease, opacity .2s ease; }
+.burger span { display: block; width: 1.3rem; height: 3px; border-radius: 2px; background: #fff; transition: transform .25s ease, opacity .2s ease; }
 .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
@@ -227,9 +235,7 @@ a.est-inactif:not(.bouton) { color: var(--encre-2); text-decoration: none; curso
 .nav {
   position: fixed; inset: var(--entete-h) 0 0 0; z-index: 49;
   padding: 1.25rem var(--marge-page) 3rem; overflow-y: auto;
-  background: var(--papier);
-  background-image: linear-gradient(var(--carreau) 1px, transparent 1px), linear-gradient(90deg, var(--carreau) 1px, transparent 1px);
-  background-size: 22px 22px;
+  background: var(--marine);
   visibility: hidden; opacity: 0; transform: translateY(-.5rem);
   transition: opacity .2s ease, transform .2s ease, visibility 0s linear .2s;
 }
@@ -238,9 +244,9 @@ a.est-inactif:not(.bouton) { color: var(--encre-2); text-decoration: none; curso
 .nav-liste a {
   display: block; padding: .55rem 0;
   font: 900 clamp(1.9rem, 9vw, 2.5rem)/1.05 var(--police-titre); text-transform: uppercase;
-  color: var(--encre); text-decoration: none; border-bottom: 2px dashed rgba(22, 22, 27, .18);
+  color: #fff; text-decoration: none; border-bottom: 2px dashed rgba(255, 255, 255, .18);
 }
-.nav-liste a:hover, .nav-liste a.actif { color: var(--stylo); }
+.nav-liste a:hover, .nav-liste a.actif { color: var(--accent); }
 body.menu-ouvert { overflow: hidden; }
 
 @media (max-width: 22.5rem) { .entete-nom { font-size: 1.3rem; } .logo-ballon { display: none; } }
@@ -250,8 +256,9 @@ body.menu-ouvert { overflow: hidden; }
   .nav { position: static; visibility: visible; opacity: 1; transform: none; padding: 0; overflow: visible; background: none; transition: none; }
   .nav-liste { display: flex; gap: .1rem; margin-right: .6rem; }
   .nav-liste a { padding: .45rem .55rem; border: 0; border-radius: 6px; font: 700 .96rem/1 var(--police-texte); text-transform: none; }
-  .nav-liste a:hover { background: var(--fluo); color: var(--encre); }
-  .nav-liste a.actif { background: linear-gradient(transparent 60%, var(--fluo) 60%); color: var(--encre); }
+  .nav-liste a { color: rgba(255, 255, 255, .88); }
+  .nav-liste a:hover { background: rgba(255, 255, 255, .1); color: #fff; }
+  .nav-liste a.actif { background: none; color: #fff; box-shadow: inset 0 -3px 0 var(--accent); border-radius: 0; }
 }
 
 /* ═════════════════ ACCUEIL ═════════════════ */
@@ -300,7 +307,7 @@ body.menu-ouvert { overflow: hidden; }
 .hero-actions li:nth-child(odd) .puce { transform: rotate(-1.2deg); }
 .hero-actions li:nth-child(even) .puce { transform: rotate(1deg); }
 .puce-vert { background: var(--vert-clair); }
-.puce-rose { background: var(--rose-clair); }
+.puce-rose { background: var(--accent-clair); }
 .puce-carton { background: var(--carton-clair); }
 .puce-bleu { background: var(--bleu-clair); }
 
@@ -313,16 +320,16 @@ body.menu-ouvert { overflow: hidden; }
   position: relative; align-self: start;
   padding: 1.15rem 1rem 1.25rem;
   color: var(--led);
-  background-color: #000;
-  background-image: radial-gradient(rgba(255, 255, 255, .08) 1px, transparent 1.4px);
+  background-color: var(--marine-nuit);
+  background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1.4px);
   background-size: 6px 6px;
   border: 4px solid var(--encre); border-radius: 14px;
-  box-shadow: inset 0 0 0 3px #2a2a33, 8px 8px 0 rgba(22, 22, 27, .22);
+  box-shadow: inset 0 0 0 3px #1c2a52, 8px 8px 0 var(--accent);
 }
 .panneau-titre {
   display: flex; align-items: center; justify-content: center; gap: .5rem;
   margin: 0 0 .9rem; font: 800 1.35rem/1 var(--police-titre); letter-spacing: .06em; text-transform: uppercase;
-  text-shadow: 0 0 8px rgba(255, 207, 51, .55);
+  text-shadow: 0 0 8px rgba(255, 199, 44, .5);
 }
 .panneau-message { margin-top: .75rem; text-align: center; color: #fff; }
 .panneau-message:empty { display: none; }
@@ -332,12 +339,12 @@ body.menu-ouvert { overflow: hidden; }
 .panneau-ligne { display: flex; justify-content: space-between; margin: 0 0 .5rem; font: 800 1.1rem/1 var(--police-titre); letter-spacing: .04em; text-transform: uppercase; }
 .led-barre { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; height: .9rem; }
 .led { border-radius: 2px; background: var(--led-off); }
-.led.allumee { background: var(--led); box-shadow: 0 0 6px rgba(255, 207, 51, .65); }
+.led.allumee { background: var(--led); box-shadow: 0 0 6px rgba(255, 199, 44, .6); }
 .panneau-texte { margin: .55rem 0 0; font-size: .92rem; color: rgba(255, 255, 255, .9); }
 .panneau-agenda { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .6rem; margin: 1rem 0 0; font-size: .9rem; color: rgba(255, 255, 255, .85); }
 .lien-agenda {
   display: inline-flex; align-items: center; min-height: 2.5rem; padding: .3rem .8rem;
-  border: 2px solid rgba(255, 207, 51, .6); border-radius: 999px;
+  border: 2px solid rgba(255, 199, 44, .55); border-radius: 999px;
   color: var(--led); font-weight: 700; text-decoration: none;
 }
 .lien-agenda:hover { background: rgba(255, 207, 51, .12); text-decoration: none; }
@@ -360,7 +367,7 @@ body.menu-ouvert { overflow: hidden; }
 }
 .lcd-sep::before, .lcd-sep::after {
   content: ""; width: calc(var(--chiffre) * .16); height: calc(var(--chiffre) * .16);
-  border-radius: 1px; background: var(--led); box-shadow: 0 0 6px rgba(255, 207, 51, .6);
+  border-radius: 1px; background: var(--led); box-shadow: 0 0 6px rgba(255, 199, 44, .55);
 }
 .point-direct { flex: none; width: .75rem; height: .75rem; border-radius: 50%; background: #ff3b47; box-shadow: 0 0 10px #ff3b47; }
 [data-etat="direct"] .panneau-titre { color: #ff8a92; text-shadow: 0 0 8px rgba(255, 59, 71, .55); }
@@ -403,7 +410,7 @@ body.menu-ouvert { overflow: hidden; }
 }
 .todo-titre { margin-bottom: .5rem; font: 800 clamp(1.35rem, 5.2vw, 1.7rem)/1.05 var(--police-titre); text-transform: uppercase; }
 .todo-corps p { margin-bottom: 1rem; line-height: 1.5; }
-.todo-rose { --note: var(--rose-clair); --rot: -1.4deg; }
+.todo-rose { --note: var(--accent-clair); --rot: -1.4deg; }
 .todo-vert { --note: var(--vert-clair); --rot: 1.1deg; }
 .todo-jaune { --note: var(--jaune-clair); --rot: -.7deg; }
 .todo-bleu { --note: var(--bleu-clair); --rot: 1.3deg; }
@@ -500,7 +507,7 @@ body.menu-ouvert { overflow: hidden; }
 .faq-reponse p { margin: 0; line-height: 1.55; }
 
 /* ═════════════════ PIED DE PAGE ═════════════════ */
-.pied { padding: 3rem 0 2.5rem; background: var(--encre); color: #f1f1f5; border-top: 4px solid var(--encre); }
+.pied { padding: 3rem 0 2.5rem; background: var(--marine-nuit); color: #f1f1f5; border-top: 4px solid var(--accent); }
 .pied a { color: #fff; }
 .pied-haut { display: grid; gap: 1rem; margin-bottom: 1.75rem; }
 .pied-nom { margin: 0; font: 900 clamp(1.8rem, 5.5vw, 2.3rem)/1 var(--police-titre); }
@@ -625,8 +632,8 @@ body.modale-ouverte { overflow: hidden; }
 .carton-remplissage {
   position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--p, 0) * 100%);
   border-top: 4px solid var(--encre);
-  background-color: var(--rose);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><g fill='%23ffffff' opacity='.5'><path d='M10 12 L16 9 Q20 14 24 9 L30 12 L36 20 L31 26 L28 24 L28 44 L12 44 L12 24 L9 26 L4 20 Z'/><path d='M50 46 L70 46 L72 74 L64 74 L60 58 L56 74 L48 74 Z'/><path d='M48 8 L58 5 L68 8 L76 16 L72 24 L68 21 L68 40 L48 40 L48 21 L44 24 L40 16 Z'/><path d='M8 52 L18 49 L28 52 L34 60 L30 67 L26 64 L26 76 L10 76 L10 64 L6 67 L2 60 Z'/></g></svg>");
+  background-color: var(--accent);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><g fill='%2314234a' opacity='.13'><path d='M10 12 L16 9 Q20 14 24 9 L30 12 L36 20 L31 26 L28 24 L28 44 L12 44 L12 24 L9 26 L4 20 Z'/><path d='M50 46 L70 46 L72 74 L64 74 L60 58 L56 74 L48 74 Z'/><path d='M48 8 L58 5 L68 8 L76 16 L72 24 L68 21 L68 40 L48 40 L48 21 L44 24 L40 16 Z'/><path d='M8 52 L18 49 L28 52 L34 60 L30 67 L26 64 L26 76 L10 76 L10 64 L6 67 L2 60 Z'/></g></svg>");
   background-size: 5.5rem 5.5rem;
 }
 .carton-graduations { list-style: none; position: absolute; inset: 0; pointer-events: none; }
@@ -757,3 +764,76 @@ textarea.quiz-champ { min-height: 6rem; resize: vertical; line-height: 1.7; }
   .fiches-infos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (min-width: 60rem) { .infos-bas { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 3rem; align-items: start; } }
+
+/* ════════════════════════════════════════════════════════════════════
+   FINITIONS — identité bleu marine + jaune GEA
+   ════════════════════════════════════════════════════════════════════ */
+
+::selection { background: var(--accent); color: var(--marine); }
+a { color: var(--stylo); }
+:focus-visible { outline: 3px solid var(--stylo); outline-offset: 3px; }
+.entete :focus-visible, .pied :focus-visible, .panneau :focus-visible { outline-color: var(--accent); }
+
+/* Le logo : un tee-shirt marine dans un carré jaune */
+.logo-rond {
+  display: inline-grid; place-items: center; flex: none;
+  width: 2.2rem; height: 2.2rem; background: var(--accent); border-radius: 9px 11px 8px 12px;
+}
+.logo-rond svg { width: 1.3rem; height: 1.3rem; fill: var(--marine); }
+.entete .bouton { border-color: var(--marine-nuit); box-shadow: 3px 3px 0 var(--marine-nuit); }
+.entete .bouton:hover { box-shadow: 5px 5px 0 var(--marine-nuit); }
+.entete .bouton:active { box-shadow: 1px 1px 0 var(--marine-nuit); }
+
+/* Titres de section : un trait jaune qui les ancre */
+.titre-section::after {
+  content: ""; display: block; width: 3.6rem; height: .38rem; margin-top: .7rem;
+  background: var(--accent); border-radius: 3px;
+}
+.intro { max-width: 40rem; line-height: 1.65; }
+.sous-titre { color: var(--marine); }
+
+/* Stickers et pastilles */
+.sticker-rose, .sticker-accent { background: var(--accent); color: var(--marine); }
+.sticker-jaune { background: var(--accent); color: var(--marine); }
+.chaine-num { background: var(--accent); }
+
+/* Cartes : même bordure, même ombre, un léger relief au survol */
+.fiche-info, .encadre, .quiz, .asso, .carton-jauge .carton-zone {
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.fiche-info { box-shadow: 4px 4px 0 var(--marine); }
+.fiche-info:nth-child(2n) { box-shadow: 4px 4px 0 var(--accent); }
+.fiche-info-large { background: var(--accent-clair); }
+@media (hover: hover) {
+  .fiche-info:hover, .encadre:hover { transform: translate(-2px, -2px); }
+  .fiche-info:hover { box-shadow: 6px 6px 0 var(--marine); }
+  .fiche-info:nth-child(2n):hover { box-shadow: 6px 6px 0 var(--accent); }
+}
+.encadre { box-shadow: 4px 4px 0 var(--accent); }
+
+/* Le quiz aux couleurs GEA */
+.quiz { box-shadow: 6px 6px 0 var(--marine); }
+.quiz-numero { background: var(--marine); }
+.quiz-option input:checked + span { background: var(--accent); }
+.quiz-sticker { background: var(--accent); }
+
+/* Pied de page */
+.pied-nom .entete-gea { color: var(--marine); }
+.pied-liens a:hover { border-color: var(--accent); background: rgba(255, 199, 44, .12); color: #fff; }
+
+/* Les notes au surligneur restent lisibles sur le nouveau jaune */
+.compteur-objectif strong { background: linear-gradient(transparent 55%, var(--accent) 55%); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fiche-info:hover, .encadre:hover { transform: none; }
+}
+
+/* L'en-tête reste sur une ligne, même sur les petits téléphones */
+.entete-cta { white-space: nowrap; flex: none; }
+@media (max-width: 26rem) {
+  .entete-cta { padding-inline: .6rem; font-size: .95rem; }
+  .cta-emoji { display: none; }
+}
+@media (max-width: 22.5rem) {
+  .logo-rond { display: none; }
+}
