@@ -176,9 +176,10 @@ const CONFIG = {
   // 👥 L'ÉQUIPE. role : facultatif (la ligne est masquée si c'est vide).
   // photo : facultatif aussi ; laissé vide, le site affiche juste les noms.
   equipe: [
-    { nom: "Volkan Akbulut",   role: "", photo: "" },
-    { nom: "Julien Pires",     role: "", photo: "" },
+    // Dans le même ordre que sur la photo de groupe (de gauche à droite)
     { nom: "Abdoulaye Deme",   role: "", photo: "" },
+    { nom: "Julien Pires",     role: "", photo: "" },
+    { nom: "Volkan Akbulut",   role: "", photo: "" },
     { nom: "Noha Bayonga",     role: "", photo: "" },
   ],
 

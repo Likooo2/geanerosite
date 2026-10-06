@@ -860,3 +860,26 @@ a { color: var(--stylo); }
 @media (min-width: 56rem) {
   .pied-logos { grid-column: 1 / -1; justify-content: flex-start; }
 }
+
+/* ═════════════════ LA PHOTO DE L'ÉQUIPE ═════════════════ */
+/* Un grand polaroïd scotché, dans l'esprit de l'affiche d'accueil */
+.photo-equipe {
+  position: relative; margin: 1.6rem 0 1.5rem; padding: .7rem .7rem 0;
+  background: var(--blanc); border: 3px solid var(--marine);
+  box-shadow: 6px 6px 0 var(--accent); transform: rotate(-.8deg);
+}
+.photo-equipe::before, .photo-equipe::after {   /* le scotch */
+  content: ""; position: absolute; top: -.85rem; width: 5.5rem; height: 1.5rem;
+  background: rgba(238, 222, 166, .88); box-shadow: 0 1px 2px rgba(20, 35, 74, .15);
+}
+.photo-equipe::before { left: 1.2rem; transform: rotate(-6deg); }
+.photo-equipe::after { right: 1.2rem; transform: rotate(5deg); }
+.photo-equipe img { display: block; width: 100%; height: auto; aspect-ratio: 1400 / 988; object-fit: cover; background: var(--bleu-clair); }
+.photo-equipe figcaption {
+  padding: .65rem .2rem .8rem; text-align: center;
+  font: 700 clamp(1.1rem, 3.6vw, 1.3rem)/1.2 var(--police-main); color: var(--stylo);
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .photo-equipe { transition: transform .25s ease; }
+  .photo-equipe:hover { transform: rotate(0deg) translateY(-2px); }
+}
